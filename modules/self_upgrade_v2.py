@@ -1,7 +1,7 @@
 import os
 import logging
 
-class SelfUpgradeV2:
+class SelfUpgradeManager:
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
