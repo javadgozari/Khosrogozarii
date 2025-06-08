@@ -1,4 +1,5 @@
 import logging
+
 from modules.self_upgrade_v2 import SelfUpgradeV2
 from modules.gpt_brain import GPTBrain
 from modules.memory_core import MemoryCore
@@ -7,7 +8,7 @@ from modules.voice_actor import VoiceActor
 from modules.voice_changer import VoiceChanger
 from modules.whisper_module import WhisperModule
 
-# فعال‌سازی کدهای سایر مغزها
+# فعال‌سازی مغزهای فرعی
 from modules.psychologist import Psychologist
 from modules.philosophy_core import PhilosophyCore
 from modules.science_searcher import ScienceSearcher
@@ -36,7 +37,7 @@ def main():
     logger.info("🚀 اجرای خسرو آغاز شد...")
 
     memory = MemoryCore()
-    brain = GPTBrain(memory=memory)
+    brain = GPTBrain(memory=memory)  # ← شرط مهم: GPTBrain باید memory بپذیره
     upgrader = SelfUpgradeV2()
 
     brain.activate()
