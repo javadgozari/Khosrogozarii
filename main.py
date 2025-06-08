@@ -1,5 +1,5 @@
 import logging
-from modules.self_upgrade_v2 import SelfUpgradeManager
+from modules.self_upgrade_v2 import SelfUpgradeV2
 from modules.gpt_brain import GPTBrain
 from modules.memory_core import MemoryCore
 from modules.vision_module import VisionModule
@@ -7,7 +7,7 @@ from modules.voice_actor import VoiceActor
 from modules.voice_changer import VoiceChanger
 from modules.whisper_module import WhisperModule
 
-# اضافه کردن سایر مغزها
+# فعال‌سازی کدهای سایر مغزها
 from modules.psychologist import Psychologist
 from modules.philosophy_core import PhilosophyCore
 from modules.science_searcher import ScienceSearcher
@@ -35,42 +35,15 @@ def main():
     logger = logging.getLogger("root")
     logger.info("🚀 اجرای خسرو آغاز شد...")
 
-    # فعال‌سازی حافظه و مغز اصلی
     memory = MemoryCore()
     brain = GPTBrain(memory=memory)
-    upgrader = SelfUpgradeManager()
+    upgrader = SelfUpgradeV2()
 
-    # فعال‌سازی مغزهای فرعی و عملکردها
-    psychologist = Psychologist()
-    philosopher = PhilosophyCore()
-    scientist = ScienceSearcher()
-    translator = Translator()
-    math = MathSolver()
-    doctor = MedicalExpert()
-    poet_molavi = PoetMolavi()
-    poet_sufi = PoetSufi()
-    storyteller = PersianStoryTeller()
-    lawyer = LegalAdvisor()
-    coach = LifeCoach()
-    logic = LogicMaster()
-    history = HistoryGuru()
-    music = MusicComposer()
-    ocr = OCRReader()
-    emotion_brain = EmotionBrain()
-    emotion_talker = EmotionResponder()
-    emotion_detector = EmotionDetector()
-    game = GameDeveloper()
-    reminder = ReminderCore()
-    vision = VisionModule()
-    speaker = VoiceActor()
-    voice_mod = VoiceChanger()
-    whisper = WhisperModule()
-
-    # فعال‌سازی مغزها
     brain.activate()
-    upgrader.check_for_updates()
+    upgrader.check_for_update()
+    upgrader.perform_upgrade()
 
-    logger.info("🧠 خسرو اکنون کاملاً فعال و متصل به اینترنت، دوربین و میکروفن است.")
+    logger.info("✅ مغز اصلی و سیستم ارتقا فعال شدند.")
 
 if __name__ == "__main__":
     main()
