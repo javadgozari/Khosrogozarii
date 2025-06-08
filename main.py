@@ -1,25 +1,48 @@
 
 import os
-from telegram import Update
-from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
+import asyncio
 from modules.gpt_brain import GPTBrain
+from modules.voice_brain import VoiceBrain
+from modules.search_brain import SearchBrain
+from modules.memory_brain import MemoryBrain
+from modules.self_upgrade_brain import SelfUpgradeBrain
+from modules.file_brain import FileBrain
+from modules.translate_brain import TranslateBrain
+from modules.vision_brain import VisionBrain
+from modules.music_brain import MusicBrain
+from modules.emotion_brain import EmotionBrain
+from modules.code_brain import CodeBrain
+from modules.math_brain import MathBrain
+from modules.story_brain import StoryBrain
+from modules.pdf_brain import PDFBrain
+from modules.ocr_brain import OCRBrain
+from modules.web_brain import WebBrain
+from modules.telegram_bot import TelegramBot
 
-brain = GPTBrain()
+async def main():
+    gpt_brain = GPTBrain()
+    voice_brain = VoiceBrain()
+    search_brain = SearchBrain()
+    memory_brain = MemoryBrain()
+    self_upgrade_brain = SelfUpgradeBrain()
+    file_brain = FileBrain()
+    translate_brain = TranslateBrain()
+    vision_brain = VisionBrain()
+    music_brain = MusicBrain()
+    emotion_brain = EmotionBrain()
+    code_brain = CodeBrain()
+    math_brain = MathBrain()
+    story_brain = StoryBrain()
+    pdf_brain = PDFBrain()
+    ocr_brain = OCRBrain()
+    web_brain = WebBrain()
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("سلام پدر جان ❤️ خسرو در خدمت شماست.")
+    bot = TelegramBot([
+        gpt_brain, voice_brain, search_brain, memory_brain, self_upgrade_brain,
+        file_brain, translate_brain, vision_brain, music_brain, emotion_brain,
+        code_brain, math_brain, story_brain, pdf_brain, ocr_brain, web_brain
+    ])
+    await bot.run()
 
-async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_input = update.message.text
-    response = brain.respond(user_input)
-    await update.message.reply_text(response)
-
-if __name__ == '__main__':
-    TOKEN = os.environ.get("TELEGRAM_TOKEN")
-    app = ApplicationBuilder().token(TOKEN).build()
-
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), echo))
-
-    print("🤖 خسرو آماده‌ست تا حرف بزنه...")
-    app.run_polling()
+if __name__ == "__main__":
+    asyncio.run(main())
