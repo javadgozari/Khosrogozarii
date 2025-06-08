@@ -1,8 +1,58 @@
-import os import logging import datetime import requests
+import os
+import logging
+import datetime
+import requests
 
-class SelfUpgradeV2: def init(self): logging.basicConfig(level=logging.INFO) self.logger = logging.getLogger("SelfUpgrade") self.version = "2.0" self.logger.info("🧠 ماژول SelfUpgradeV2 فعال شد (نسخه %s)", self.version) self.upgrade_log = [] self.sources = { "GitHub": "https://api.github.com/repos/your-username/khosrow-ai/releases/latest", "HuggingFace": "https://huggingface.co/api/models/your-model-id", }
+class SelfUpgradeV2:
+    def __init__(self):
+        logging.basicConfig(level=logging.INFO)
+        self.logger = logging.getLogger("SelfUpgrade")
+        self.version = "2.0"
+        self.logger.info("🧠 ماژول SelfUpgradeV2 فعال شد (نسخه %s)", self.version)
+        self.upgrade_log = []
+        self.sources = {
+            "GitHub": "https://api.github.com/repos/your-username/khosrow-ai/releases/latest",
+            "HuggingFace": "https://huggingface.co/api/models/your-model-id",
+        }
 
-def check_for_update(self): self.logger.info("📡 در حال بررسی به‌روزرسانی از منابع اینترنتی...") updates_available = [] for name, url in self.sources.items(): try: response = requests.get(url) if response.status_code == 200: updates_available.append(name) self.logger.info(f"📥 به‌روزرسانی در {name} موجود است.") else: self.logger.warning(f"⚠️ عدم دسترسی به {name}") except Exception as e: self.logger.error(f"❌ خطا در اتصال به {name}: {e}") return updates_available def perform_upgrade(self): try: self.logger.info("⚙️ اجرای فرآیند ارتقای هوش خسرو...") # در اینجا می‌توانیم دانلود فایل یا ارتقای واقعی را پیاده کنیم self.upgrade_log.append({ "timestamp": datetime.datetime.now().isoformat(), "status": "success", "version": self.version, "details": "اتصال به GitHub و HuggingFace برای ارتقا فعال شد." }) self.logger.info("✅ ارتقا با موفقیت انجام شد.") except Exception as e: self.logger.error("❌ خطا در حین ارتقا: %s", e) def report_upgrades(self): return "\n".join([ f"{item['timestamp']} - نسخه {item['version']} - {item['details']}" for item in self.upgrade_log ]) or "هیچ ارتقایی تا کنون ثبت نشده." اجرای آزمایشی فقط برای تست 
+    def check_for_update(self):
+        self.logger.info("📡 در حال بررسی به‌روزرسانی از منابع اینترنتی...")
+        updates_available = []
+        for name, url in self.sources.items():
+            try:
+                response = requests.get(url)
+                if response.status_code == 200:
+                    updates_available.append(name)
+                    self.logger.info(f"📥 به‌روزرسانی در {name} موجود است.")
+                else:
+                    self.logger.warning(f"⚠️ عدم دسترسی به {name}")
+            except Exception as e:
+                self.logger.error(f"❌ خطا در اتصال به {name}: {e}")
+        return updates_available
 
-if name == "main": upgrader = SelfUpgradeV2() if upgrader.check_for_update(): upgrader.perform_upgrade() print(upgrader.report_upgrades())
+    def perform_upgrade(self):
+        try:
+            self.logger.info("⚙️ اجرای فرآیند ارتقای هوش خسرو...")
+            # در اینجا می‌توانیم دانلود فایل یا ارتقای واقعی را پیاده کنیم
+            self.upgrade_log.append({
+                "timestamp": datetime.datetime.now().isoformat(),
+                "status": "success",
+                "version": self.version,
+                "details": "اتصال به GitHub و HuggingFace برای ارتقا فعال شد."
+            })
+            self.logger.info("✅ ارتقا با موفقیت انجام شد.")
+        except Exception as e:
+            self.logger.error("❌ خطا در حین ارتقا: %s", e)
 
+    def report_upgrades(self):
+        return "\n".join([
+            f"{item['timestamp']} - نسخه {item['version']} - {item['details']}"
+            for item in self.upgrade_log
+        ]) or "هیچ ارتقایی تا کنون ثبت نشده."
+
+# اجرای آزمایشی فقط برای تست
+if __name__ == "__main__":
+    upgrader = SelfUpgradeV2()
+    if upgrader.check_for_update():
+        upgrader.perform_upgrade()
+        print(upgrader.report_upgrades())
