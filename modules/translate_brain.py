@@ -1,5 +1,7 @@
-import requests
 import logging
+from transformers import pipeline
+from deep_translator import GoogleTranslator
+from langdetect import detect
 
 class TranslateBrain:
     def __init__(self):
@@ -7,51 +9,44 @@ class TranslateBrain:
         self.logger.setLevel(logging.INFO)
         if not self.logger.hasHandlers():
             handler = logging.StreamHandler()
-            handler.setFormatter(logging.Formatter('%(asctime)s - %(message)s'))
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            handler.setFormatter(formatter)
             self.logger.addHandler(handler)
 
-        self.supported_languages = {
-            'en': 'English',
-            'fa': 'Persian',
-            'ar': 'Arabic',
-            'fr': 'French',
-            'de': 'German',
-            'es': 'Spanish'
-        }
+        self.logger.info("🧠 TranslateBrain آماده است.")
+        self.offline_translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-fa")
 
-    def translate_online(self, text, source_lang='auto', target_lang='fa'):
+    def detect_language(self, text):
         try:
-            url = "https://api.mymemory.translated.net/get"
-            params = {
-                "q": text,
-                "langpair": f"{source_lang}|{target_lang}"
-            }
-            response = requests.get(url, params=params)
-            result = response.json()
-            translated = result['responseData']['translatedText']
-            self.logger.info(f"Online Translation Success: {text} → {translated}")
-            return translated
+            lang = detect(text)
+            self.logger.info(f"📡 زبان تشخیص‌داده‌شده: {lang}")
+            return lang
         except Exception as e:
-            self.logger.error(f"Online translation failed: {e}")
-            return "❌ خطا در ترجمه آنلاین"
+            self.logger.error(f"❌ خطا در تشخیص زبان: {e}")
+            return 'unknown'
 
-    def translate_offline(self, text, source_lang='en', target_lang='fa'):
+    def translate_online(self, text, target_lang='fa'):
         try:
-            import argostranslate.package, argostranslate.translate
-            installed_languages = argostranslate.translate.get_installed_languages()
-            from_lang = next((lang for lang in installed_languages if lang.code == source_lang), None)
-            to_lang = next((lang for lang in installed_languages if lang.code == target_lang), None)
-
-            if not from_lang or not to_lang:
-                return "❗ زبان‌های موردنظر برای ترجمه آفلاین نصب نشده‌اند."
-
-            translation = from_lang.get_translation(to_lang)
-            result = translation.translate(text)
-            self.logger.info(f"Offline Translation Success: {text} → {result}")
+            result = GoogleTranslator(source='auto', target=target_lang).translate(text)
+            self.logger.info(f"✅ ترجمه آنلاین: {result}")
             return result
         except Exception as e:
-            self.logger.error(f"Offline translation failed: {e}")
-            return "❌ خطا در ترجمه آفلاین"
+            self.logger.error(f"❌ خطا در ترجمه آنلاین: {e}")
+            return "خطا در ترجمه آنلاین"
+
+    def translate_offline(self, text, target_lang='fa'):
+        try:
+            if target_lang != 'fa':
+                return "❌ ترجمه آفلاین فعلاً فقط به فارسی فعال است."
+            result = self.offline_translator(text)[0]['translation_text']
+            self.logger.info(f"✅ ترجمه آفلاین: {result}")
+            return result
+        except Exception as e:
+            self.logger.error(f"❌ خطا در ترجمه آفلاین: {e}")
+            return "خطا در ترجمه آفلاین"
 
     def auto_translate(self, text, target_lang='fa', method='online'):
-        if method ==
+        if method == 'offline':
+            return self.translate_offline(text, target_lang=target_lang)
+        else:
+            return self.translate_online(text, target_lang=target_lang)
