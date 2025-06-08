@@ -1,11 +1,10 @@
-
 import datetime
 
 class GPTBrain:
-def __init__(self, memory=None):
-    self.memory = memory
-    self.knowledge_base = []
-    self.learning_log = []
+    def __init__(self, memory=None):
+        self.memory = memory
+        self.knowledge_base = []
+        self.learning_log = []
 
     def learn(self, topic, data):
         entry = {
@@ -14,30 +13,22 @@ def __init__(self, memory=None):
             "data": data
         }
         self.knowledge_base.append(entry)
-        self.learning_log.append(f"Learned about {topic} at {entry['timestamp']}")
-        return f"I've learned about {topic}."
+        self.learning_log.append(f"یادگرفتم درباره {topic}: {data}")
+        if self.memory:
+            self.memory.save(topic, data)
+        return f"یاد گرفتم درباره {topic} ✅"
 
     def recall(self, topic):
+        if self.memory:
+            data = self.memory.retrieve(topic)
+            if data:
+                return f"یادآوری از حافظه: {data}"
         memories = [entry['data'] for entry in self.knowledge_base if entry['topic'] == topic]
-        if memories:
-            return f"Here's what I know about {topic}:\n" + "\n".join(memories)
-        else:
-            return f"I don't have knowledge about {topic} yet."
+        return memories[-1] if memories else "یادآوری‌ای برای این موضوع ندارم."
 
-    def respond(self, input_text):
-        # Naive keyword-based response logic for example purposes
-        if "what do you know about" in input_text.lower():
-            topic = input_text.lower().split("about")[-1].strip()
-            return self.recall(topic)
-        elif "learn" in input_text.lower():
-            parts = input_text.lower().split("learn")
-            if len(parts) > 1:
-                topic_data = parts[1].strip().split(":")
-                if len(topic_data) == 2:
-                    topic = topic_data[0].strip()
-                    data = topic_data[1].strip()
-                    return self.learn(topic, data)
-        return "I'm still learning. Could you teach me more?"
+    def reply_to(self, message):
+        response = f"🧠 پاسخ GPT به: {message}"
+        return response
 
-    def get_learning_log(self):
-        return "\n".join(self.learning_log)
+    def activate(self):
+        print("🧠 مغز GPT فعال شد!")
