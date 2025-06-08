@@ -1,10 +1,11 @@
 
 import datetime
 
-class GPTBrain:
-    def __init__(self):
-        self.knowledge_base = []
-        self.learning_log = []
+class GPTBrain
+def __init__(self, memory=None):
+    self.memory = memory
+    self.knowledge_base = []
+    self.learning_log = []
 
     def learn(self, topic, data):
         entry = {
