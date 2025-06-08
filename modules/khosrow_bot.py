@@ -16,7 +16,7 @@ def handle_message(update: Update, context: CallbackContext):
     update.message.reply_text(response)
 
 def main():
-    # توکن رباتت رو همین‌جا بذار
+    #8107902213:AAEHTM3mUpjoHT4IB3tm7wUuZ3v4LMoGVbs
     updater = Updater("8107902213:AAEHTM3mUpjoHT4IB3tm7wUuZ3v4LMoGVbs", use_context=True)
     dp = updater.dispatcher
 
