@@ -1,7 +1,7 @@
 
 import datetime
 
-class GPTBrain
+class GPTBrain:
 def __init__(self, memory=None):
     self.memory = memory
     self.knowledge_base = []
