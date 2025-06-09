@@ -1,38 +1,36 @@
-# مغزهای GPT و حافظه
+# Core AI & LLM Tools
 openai>=1.0.0
 transformers>=4.39.3
 torch>=2.0.1
 sentencepiece
 
-# پردازش صدا و تبدیل گفتار
+# Audio Processing
 pydub
 speechrecognition
 whisper
 librosa
 
-# OCR و پردازش تصویر
+# OCR & Image Processing
 pytesseract
 opencv-python
 Pillow
 
-# ترجمه و NLP
+# Translation & Language Detection
 googletrans==4.0.0rc1
 langdetect
 
-# بات تلگرام
+# Telegram Bot
 python-telegram-bot==20.3
 
-# پردازش فایل و لاگ‌گیری
+# Environment & HTTP
 python-dotenv
 requests
 aiohttp
-tqdm
 
-# تشخیص احساس و تحلیل متن
+# Utility
+tqdm
 scikit-learn
 nltk
-
-# ابزارهای دیگر و وابستگی‌ها
 numpy
 matplotlib
 beautifulsoup4
