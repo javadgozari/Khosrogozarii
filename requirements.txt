@@ -1,7 +1,7 @@
 # Core AI & LLM Tools
 openai>=1.0.0
-transformers>=4.39.3
-torch>=2.0.1
+transformers==4.39.3
+torch==2.0.1
 sentencepiece
 
 # Audio Processing
@@ -19,13 +19,13 @@ Pillow
 googletrans==4.0.0rc1
 langdetect
 
-# Telegram Bot
-python-telegram-bot==20.3
+# Telegram Bot (سازگار با python 3.11 و aiohttp جدید)
+python-telegram-bot==20.5
 
 # Environment & HTTP
 python-dotenv
 requests
-aiohttp
+aiohttp==3.9.5  # سازگار با telegram-bot 20.5
 
 # Utility
 tqdm
