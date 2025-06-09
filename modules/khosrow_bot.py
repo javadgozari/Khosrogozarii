@@ -1,34 +1,48 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 from modules.gpt_brain import GPTBrain
 from modules.memory_core import MemoryCore
+from modules.self_upgrade_v2 import SelfUpgradeV2
+from modules.vision_module import VisionModule
+from modules.voice_actor import VoiceActor
+from modules.voice_changer import VoiceChanger
+from modules.whisper_module import WhisperModule
+from modules.psychologist import Psychologist
+from modules.philosophy_core import PhilosophyCore
+from modules.science_searcher import ScienceSearcher
+from modules.science_translator import ScienceTranslator
+from modules.translator import Translator
+from modules.math_solver import MathSolver
+from modules.medical_expert import MedicalExpert
+from modules.poet_molavi import PoetMolavi
+from modules.poet_sufi import PoetSufi
+from modules.persian_story_teller import PersianStoryTeller
+from modules.legal_advisor import LegalAdvisor
+from modules.life_coach import LifeCoach
+from modules.logic_master import LogicMaster
+from modules.history_guru import HistoryGuru
+from modules.music_composer import MusicComposer
+from modules.ocr_reader import OCRReader
+from modules.emotion_brain import EmotionBrain
+from modules.emotion_responder import EmotionResponder
+from modules.emotion_detector import EmotionDetector
+from modules.game_developer import GameDeveloper
+from modules.reminder_core import ReminderCore
+from modules.voice_brain import VoiceBrain
+from modules.file_brain import FileBrain
+from modules.search_brain import SearchBrain
+from modules.memory_brain import MemoryBrain
+from modules.translate_brain import TranslateBrain
+from modules.self_upgrade_brain import SelfUpgradeBrain
+from modules.music_brain import MusicBrain
 
-# 🔐 توکن ربات تلگرام شما
-TOKEN = "8107902213:AAEHTM3mUpjoHT4IB3tm7wUuZ3v4LMoGVbs"
+def run():
+    print("🤖 خسرو با تمام مغزها در حال راه‌اندازی است...")
 
-# 🧠 فعال‌سازی مغز و حافظه
-memory = MemoryCore()
-brain = GPTBrain(memory=memory)
+    memory = MemoryCore()
+    brain = GPTBrain(memory=memory)
+    upgrader = SelfUpgradeV2()
 
-# 🎬 دستور شروع
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("سلام! من خسرو هستم 🤖 آماده‌ام که بهت کمک کنم.")
+    brain.activate()
+    upgrader.check_for_update()
+    upgrader.perform_upgrade()
 
-# 💬 پاسخ به پیام‌ها
-async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_message = update.message.text
-    response = brain.reply_to(user_message)
-    await update.message.reply_text(response)
-
-# 🚀 اجرای ربات
-def main():
-    app = ApplicationBuilder().token(TOKEN).build()
-
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-
-    print("🤖 ربات خسرو با موفقیت اجرا شد.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()
+    print("✅ خسرو با موفقیت فعال شد.")
