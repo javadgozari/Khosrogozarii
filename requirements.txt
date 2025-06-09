@@ -1,13 +1,38 @@
-transformers
-torch
-deep-translator
-langdetect
-speechrecognition
+# مغزهای GPT و حافظه
+openai>=1.0.0
+transformers>=4.39.3
+torch>=2.0.1
+sentencepiece
+
+# پردازش صدا و تبدیل گفتار
 pydub
-gTTS
+speechrecognition
+whisper
+librosa
+
+# OCR و پردازش تصویر
+pytesseract
 opencv-python
 Pillow
-python-telegram-bot==13.15
-flask
+
+# ترجمه و NLP
+googletrans==4.0.0rc1
+langdetect
+
+# بات تلگرام
+python-telegram-bot==20.3
+
+# پردازش فایل و لاگ‌گیری
+python-dotenv
 requests
+aiohttp
+tqdm
+
+# تشخیص احساس و تحلیل متن
+scikit-learn
+nltk
+
+# ابزارهای دیگر و وابستگی‌ها
+numpy
+matplotlib
 beautifulsoup4
