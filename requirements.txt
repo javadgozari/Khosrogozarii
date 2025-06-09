@@ -1,33 +1,25 @@
-# Core AI & LLM Tools
-openai>=1.0.0
-transformers==4.39.3
+openai==1.1.1
+transformers==4.37.2
 torch==2.0.1
 sentencepiece
 
-# Audio Processing
 pydub
 speechrecognition
-whisper
 librosa
 
-# OCR & Image Processing
 pytesseract
 opencv-python
 Pillow
 
-# Translation & Language Detection
 googletrans==4.0.0rc1
 langdetect
 
-# Telegram Bot (سازگار با python 3.11 و aiohttp جدید)
-python-telegram-bot==20.5
+python-telegram-bot==20.3
 
-# Environment & HTTP
 python-dotenv
 requests
-aiohttp==3.9.5  # سازگار با telegram-bot 20.5
+aiohttp
 
-# Utility
 tqdm
 scikit-learn
 nltk
