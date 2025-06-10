@@ -1,35 +1,29 @@
-openai>=1.0.0
-transformers>=4.37.0
-torch>=2.0.1
+openai==1.3.7
+transformers==4.37.2
+torch==2.0.1
 sentencepiece
 
-# Audio
 pydub
 SpeechRecognition
 whisper
-librosa
+librosa==0.10.0.post2
 
-# OCR & Image
 pytesseract
 opencv-python
 Pillow
 
-# Translation & Language
 googletrans==4.0.0rc1
 langdetect
 
-# Telegram Bot - فقط این نسخه سازگاره
 python-telegram-bot==20.3
 
-# HTTP & Env
 requests
 aiohttp
 python-dotenv
 
-# Utils
 tqdm
 scikit-learn
 nltk
-numpy
-matplotlib
+numpy==1.24.3
+matplotlib==3.7.1
 beautifulsoup4
