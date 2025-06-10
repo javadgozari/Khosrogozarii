@@ -1,27 +1,27 @@
-import datetime
-import logging
+openai==1.3.7
+transformers==4.37.2
+torch==2.0.1
+sentencepiece
 
-class ReminderCore:
-    def __init__(self):
-        self.reminders = []
-        self.logger = logging.getLogger("ReminderCore")
+python-telegram-bot==20.3
+python-dotenv
+requests
+aiohttp
 
-    def set_reminder(self, text, time_str):
-        try:
-            remind_time = datetime.datetime.strptime(time_str, "%Y-%m-%d %H:%M")
-            self.reminders.append({"text": text, "time": remind_time})
-            self.logger.info(f"🔔 یادآور ثبت شد: {text} در {remind_time}")
-            return f"📝 یادآور تنظیم شد برای {remind_time}: {text}"
-        except ValueError:
-            return "⚠️ فرمت زمان صحیح نیست. مثال: 2025-06-08 18:30"
+Pillow
+opencv-python
+pytesseract
 
-    def check_reminders(self, now=None):
-        if now is None:
-            now = datetime.datetime.now()
+pydub
+SpeechRecognition
+whisper
 
-        due_reminders = [r for r in self.reminders if r["time"] <= now]
-        for r in due_reminders:
-            self.logger.info(f"⏰ یادآور فعال شد: {r['text']}")
-        self.reminders = [r for r in self.reminders if r["time"] > now]
+googletrans==4.0.0rc1
+langdetect
 
-        return [f"🔔 یادآور: {r['text']}" for r in due_reminders] or ["هیچ یادآوری‌ای فعال نیست."]
+scikit-learn
+tqdm
+nltk
+numpy==1.24.3
+matplotlib==3.7.1
+beautifulsoup4
